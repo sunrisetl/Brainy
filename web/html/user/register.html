@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <style>
+        body{
+            background: #EBF2F7;
+            font-family: Consolas;
+        }
+        .contentLogin {
+            margin: 0 ;
+
+        }
+        .registInput {
+            position: relative;
+            width: 352px;
+            margin: 12px 25px 0;
+            text-align: center;
+        }
+
+        .inputContainer {
+            flex: 1 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            width: 100%;
+            height: 48px;
+            color: #8590a6;
+            border: none;
+            border-bottom: 1px solid #ebebeb;
+            border-radius: 0;
+        }
+
+        .input {
+            color: #1a1a1a;
+            height: 24px;
+            line-height: 24px;
+            overflow: hidden;
+            flex: 1 1;
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+            border: none;
+            cursor: text;
+            background: transparent;
+        }
+
+        .input:focus {
+            outline: none;
+        }
+
+        .userTip {
+            position: absolute;
+            right: 0;
+            height: 90%;
+            padding: 12px 0 0 20px;
+            margin-top: -47px;
+            font-size: 14px;
+            color: #f1403c;
+            text-align: right;
+            cursor: text;
+            background: #fff;
+            opacity: 0;
+            box-sizing: border-box;
+            transition: opacity 0.5s;
+        }
+
+        .errorMask {
+            position: absolute;
+            height: 24px;
+            margin-top: -47px;
+            padding: 12px 0 0 0;
+            font-size: 14px;
+            color: #f1403c;
+            text-align: left;
+            cursor: text;
+            background: #fff;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .registBtn {
+            height: 36px;
+            width: calc(100% - 50px);
+            line-height: 36px;
+            margin: 20px 25px;
+            display: inline-block;
+            color: #fff;
+            background-color: #0084ff;
+            font-size: 14px;
+            border: 1px solid;
+            border-radius: 3px;
+            text-align: center;
+            outline: none;
+            cursor: pointer;
+        }
+        .res_box{
+                    width: 400px;
+                    height: 550px;
+                    border-radius: 12px;
+                    background-color: #FFFFFF;
+                    text-align: center;
+                    margin-left: 700px;
+                    position: absolute;
+                    top: 250px;
+                    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+         <h1 style="margin-left: 700px;position: absolute;top: 120px; color: #B9E2FE;font-size: 56px;">Brainly欢迎你,和我们一起分享知识!</h1>
+        <form class="res_box">
+            <a href="../page1.html"><img src="../../image/001.svg" alt="" style="width: 25%;height: 25%" class="img_a"></a>
+         <div class="contentLogin">
+             <div class="registInput">
+                 <div class="inputContainer">
+                     <label class="wrapper">
+
+                         <input type="email" id="username" class="input" placeholder="邮箱">
+                     </label>
+                     <div id="accountTip" class="userTip"></div>
+                 </div>
+             </div>
+             <div class="registInput">
+                 <div class="inputContainer">
+                     <label class="wrapper">
+                         <input type="password" id="pwd" class="input" placeholder="密码">
+                     </label>
+                     <div id="passwardTip" class="userTip"></div>
+                 </div>
+             </div><div class="registInput">
+                 <div class="inputContainer">
+                     <label class="wrapper">
+                         <input type="password" id="pwd2" class="input" placeholder="再次输入密码">
+                     </label>
+                     <div id="passwardTip2" class="userTip"></div>
+                 </div>
+             </div>
+             <div class="registInput">
+                 <label class="wrapper">
+                     <input type="text" id="yzm" maxlength="4" class="input" placeholder="验证码">
+                     <canvas width="80" height="28" id="check"></canvas>
+                 </label>
+                 <div class="errorMask"></div>
+             </div>
+                 <input  class="registBtn" type="submit" value="注册" >
+         </div>
+            <h5 style="border-bottom: 1px dotted #E9E9E9;margin-bottom: 10px;">推荐第三方账号快捷注册</h5>
+            <div class="res-img">
+                <img src="../../image/icon/QQ.png" alt="" style="width: 30px;height: 30px;border-radius: 20px" onclick="layer.msg('正在通过QQ登录',{icon:16, shade: 0.1, time:0})" >
+                <img src="../../image/icon/wechat.png" alt="" style="width: 30px;height: 30px;border-radius: 20px;" onclick="layer.msg('正在通过微信登录',{icon:16, shade: 0.1, time:0})">
+            </div>
+        </form>
+
+     <script src="../../layui/layui.js"></script>
+         <script src="../../js/jquery-1.11.2.js"></script>
+         <script>
+             $(function () {
+                 var vertify; // 验证码
+
+                 function getCheck(){
+                     var canvas = document.getElementById("check"); // 获取HTML端画布
+                     var ctx = canvas.getContext("2d"); // 获取画布2D上下文
+
+                     // //重置画板
+                     ctx.clearRect(0, 0, 80,28);
+
+                     for(var i=0; i < 200;i++){                       //循环绘制 200 个点
+                         var randx = Math.random() * canvas.width;      //生成随机生成点的横坐标
+                         var randy = Math.random() * canvas.height;     //生成随机生成点的纵坐标
+                         ctx.fillStyle = 'rgb(164, 13, 253)';         //生成的点的填充颜色
+                         ctx.fillRect(randx, randy, 1, 1);               //绘制点
+                     }
+
+                     //绘制10条线
+                     for(var i = 0; i < 5; i++){
+                         var begin = [Math.random() * canvas.width, Math.random() * canvas.height];
+                         var end =  [Math.random() * canvas.width, Math.random() * canvas.height];
+
+                         var mid =[begin[0], begin[1]];
+
+                         while(mid[0] < end[0]){
+                             mid[0] = mid[0] + (end[0] - begin[0]) / 100;
+                             mid[1] = mid[1] + (end[1] - begin[1]) / 100;
+                             ctx.fillStyle = 'black';         				  //生成的点的填充颜色
+                             ctx.fillRect(mid[0], mid[1], 1, 1);               //绘制点
+                         }
+                     }
+
+                     //去掉 0、O、1、l 这四个字符，不好辨别
+                     var nums = ["2", "3", "4", "5", "6", "7", "8", "9", "0", 'A',
+                         'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K','L', 'M', 'N',
+                         'P', 'Q', 'R','S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b',
+                         'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',  'm','n', 'p', 'q',
+                         'r', 's', 't', 'u', 'v', 'w', 'x',
+                         'y', 'z'];
+
+                     var color=['red','blue','rgb(164, 13, 253)','green'];
+                     var style=['25px Aria','22px Georgia','italic bold 22px/30px arial,sans-serif','23px 微软雅黑'];
+                     vertify = "";    //保存验证码
+                     for(var i = 0; i < 4; i++){    //生成四个字符
+                         var c = nums[Math.floor(Math.random() * nums.length)];
+                         ctx.fillStyle = color[parseInt(Math.random() * 4)]; //颜色
+                         ctx.font = style[parseInt(Math.random() * 4)];  //设置绘制的字体和大小
+                         ctx.fillText(c, 10 + 15 * i, 25);   //在指定地方绘制字符
+                         vertify += c;  //随机获取四个字符并保存
+                     }
+                 }
+                 getCheck();
+                 $("#check").click(getCheck);
+
+                 //注册
+                 var send = true;
+                 $(".registBtn").click(function () {
+                     var uName = $("#username").val();
+                     var uPwd = $("#pwd").val();
+                     // 未输入账号
+                     if (uName == null || uName == "xiaomoshengdewo@163.com") {
+                         $("#accountTip").text("请输入邮箱");
+                         $("#accountTip").css("opacity", "0.1");
+                         send = false;
+                     }
+                     // 未输入密码
+                     if (uPwd == null || uPwd == "123456") {
+                         $("#passwardTip").text("请输入密码");
+                         $("#passwardTip").css("opacity", "0.1");
+                         send = false;
+                     }
+                     // 账号密码均正确填写且验证码正确 发送请求
+                     if (send) {
+                         if($("#yzm").val().toLowerCase() == vertify.toLowerCase()) {
+                             $.get("checkusername.user", {"uName" : uName, "uPwd" : uPwd}, function (data, status) {
+                                 var res = JSON.parse(data);
+                                 if (res.result == false) {
+                                     // 重名
+                                     $("#pwd").val("");
+                                     $("#yzm").val("");
+                                     getCheck();
+                                     $("#accountTip").text(res.message);
+                                     $("#accountTip").css("opacity", "1");
+                                 } else {
+                                     // 注册成功 跳转
+                                     location.href = "login.html";
+                                 }
+                             });
+                         } else {
+                             getCheck();
+                             $("#yzm").val("");
+                             $(".errorMask").text("请提交正确的验证码 :(");
+                             $(".errorMask").css({"opacity": "1", "width": "272px"});
+                         }
+                     }
+                 });
+
+                 $("#username").focus(function () {
+                     $("#accountTip").text("");
+                     $("#accountTip").css("opacity", "0");
+                     send = true;
+                 });
+
+                 $("#pwd").focus(function () {
+                     $("#passwardTip").text("");
+                     $("#passwardTip").css("opacity", "0");
+                     send = true;
+                 });
+
+                 $("#username").blur(function () {
+                     var uName = $(this).val();
+                     if (uName == null || uName == "") {
+                         $("#accountTip").text("请输入邮箱");
+                         $("#accountTip").css("opacity", "1");
+                         send = false;
+                     }
+                 });
+
+                 $("#pwd").blur(function () {
+                     var uPwd = $(this).val();
+                     if (uPwd == null || uPwd == "") {
+                         $("#passwardTip").text("请输入密码");
+                         $("#passwardTip").css("opacity", "1");
+                         send = false;
+                     }
+                 });
+
+                 $(".errorMask").click(function () {
+                     $(this).text("");
+                     $(this).css({"opacity": "0", "width": "0"});
+                     $("#yzm").focus();
+                 });
+             });
+         </script>
+
+
+         <script>
+             layui.use(['layer','form'],function () {
+                 var layer = layui.layer,form = layui.form;
+                 lay.msg("hello world");
+             });
+         </script>
+</body>
+</html>

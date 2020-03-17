@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>问问题</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../layui/css/layui.css">
+    <link rel="stylesheet" href="../../css/all.css">
+</head>
+<body>
+<div class="fly-header layui-bg-blue">
+    <div class="layui-container">
+        <a href="../page1.html" class="fly-logo"><img src="../../image/001.svg" style="width: 35%;height: 35%" alt="">
+        </a>
+        <ul class="layui-nav fly-nav-user">
+            <li class="layui-nav-item">
+                <a class="fly-nav-avatar" href="javascript:;">
+                    <cite class="layui-hide-xs" style="color: #0C0C0C;!important;">刘十三</cite>
+                    <!--                    <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>-->
+                    <!--                    <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>-->
+                    <img src="../../image/touxiang/yurunjiangshang.jpg" style="width: 45px;height: 45px;border-radius: 20px">
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="../user/setting.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
+                    <dd><a href="#"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
+                    <dd><a href="#"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
+                    <hr style="margin: 5px 0;">
+                    <dd><a href="" style="text-align: center;">退出</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+</div>
+<a href="#" class="brainy-logo"><img src="../../image/001.svg" alt="#" style="height: 60px;"></a>
+<div class="layui-container fly-marginTop">
+    <div class="fly-panel" pad20 style="padding-top: 5px;">
+        <!--<div class="fly-none">没有权限</div>-->
+        <div class="layui-form layui-form-pane">
+            <div class="layui-tab layui-tab-brief" lay-filter="user">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">说说你的问题</li>
+                </ul>
+                <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+                    <div class="layui-tab-item layui-show">
+                        <form action="" method="post">
+                            <div class="layui-row layui-col-space15 layui-form-item">
+                                <div class="layui-col-md3">
+                                    <label class="layui-form-label">问题类型</label>
+                                    <div class="layui-input-block">
+                                        <select lay-verify="required" name="class" lay-filter="column">
+                                            <option></option>
+                                            <option value="0">科技</option>
+                                            <option value="99">技术</option>
+                                            <option value="100">文学</option>
+                                            <option value="101">历史</option>
+                                            <option value="168">数学</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md9">
+                                    <label for="L_title" class="layui-form-label">标题</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" id="L_title" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
+                                        <!-- <input type="hidden" name="id" value="{{d.edit.id}}"> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item layui-form-text">
+                                <div class="layui-input-block">
+                                    <textarea id="L_content" name="content" required lay-verify="required" placeholder="详细描述" class="layui-textarea fly-editor" style="height: 260px;"></textarea>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">悬赏积分</label>
+                                    <div class="layui-input-inline" style="width: 190px;">
+                                        <select name="experience">
+                                            <option value="20">20</option>
+                                            <option value="30">30</option>
+                                            <option value="50">50</option>
+                                            <option value="60">60</option>
+                                            <option value="80">80</option>
+                                        </select>
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux">发表后无法更改</div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <button class="layui-btn" lay-filter="*" lay-submit style="background-color: #4FB3F6">立即发布</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer class="fly-footer">
+
+    <p><a href="../../html/other/about.html" target="_blank">关于Brainly</a> 2020 &copy; <a href="http://www.layui.com/" target="_blank">陈陈</a></p>
+    <a href="../../html/other/zhaonan.html" target="_blank">招纳贤士</a>
+    <a href="#">联系我</a>
+</footer>
+<script src="../../layui/layui.js"></script>
+<script>
+    layui.cache.page = 'jie';
+    layui.cache.user = {
+        username: '游客'
+        ,uid: -1
+        ,avatar: ''
+        ,experience: 83
+        ,sex: '男'
+    };
+    layui.config({
+        version: "3.0.0"
+        ,base: '../../js/'
+    }).extend({
+        fly: 'All'
+    }).use('fly');
+</script>
+</body>
+</html>

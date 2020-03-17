@@ -1,0 +1,26 @@
+body{
+    min-height: 100vh;
+}
+.text-box{
+    position: relative;
+}
+.check-message{
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    color: #ff3a2c;
+    font-size: 10px ;
+    text-transform: uppercase;
+    transform: translateY(-50%);
+}
+.text-box input:focus{
+    background: #EBF2F7!important;
+}
+.text-box input:focus+.check-message{display: none;
+}
+.options{font-size: 14px;
+        text-decoration: none;!important;
+        overflow: hidden;}
+/*.remember-me{align-items: center;cursor: pointer}*/
+
+.checkbox input{width: 100%;height: 100%}
